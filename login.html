@@ -14,12 +14,6 @@
       integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    ><script>
-      src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-      integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
     />
     <title>Login</title>
     <style>
@@ -34,7 +28,6 @@
   <body>
     <br>
 <section class="vh-100 gradient-custom">
-  <div id="authForm">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -47,18 +40,18 @@
               <p class="text-dark-50 mb-5">Please enter your login and password!</p>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
-                <input type="email" placeholder="email" id="userEmail" class="form-control form-control-lg" />
+                <input type="email" id="typeEmailX" class="form-control form-control-lg" />
                 <label class="form-label text-dark" for="typeEmailX">Email</label>
               </div>
 
               <div data-mdb-input-init class="form-outline form-white mb-4">
-                <input type="password" placeholder="password" id="userPassword" class="form-control form-control-lg" />
+                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-dark-50" href="#!">Forgot password?</a></p>
 
-              <button id="signUpButton" data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
 
             </div>
 
@@ -72,100 +65,8 @@
       </div>
     </div>
   </div>
-</div>
 </section>
 </div>
 <!-- Pills content -->
-<script type="module">
-  //Update the below URL with the appropriate version if necessary.
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js";
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut,
-    //Update the below URL with the appropriate version if necessary.
-  } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js";
-
-  // INSERT YOUR FIREBASE CONFIG OBJECT HERE
-  const firebaseConfig = {
-  apiKey: "AIzaSyDbRUmnXeQESMd8Qfq6tv4ZzywCs8X1qMA",
-  authDomain: "authentication-web-abcd3.firebaseapp.com",
-  projectId: "authentication-web-abcd3",
-  storageBucket: "authentication-web-abcd3.appspot.com",
-  messagingSenderId: "633114440716",
-  appId: "1:633114440716:web:dd2aee1d52bddc050f2a29"
-};
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  const userEmail = document.querySelector("#userEmail");
-  const userPassword = document.querySelector("#userPassword");
-  const authForm = document.querySelector("#authForm");
-  const secretContent = document.querySelector("#secretContent");
-  const signUpButton = document.querySelector("#signUpButton");
-  const signInButton = document.querySelector("#signInButton");
-  const signOutButton = document.querySelector("#signOutButton");
-
-  secretContent.style.display = "none";
-
-  const userSignUp = async () => {
-    const signUpEmail = userEmail.value;
-    const signUpPassword = userPassword.value;
-    createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        Swal.fire("Your Account is succesfully created!");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode + errorMessage);
-      });
-  };
-
-  const userSignIn = async () => {
-    const signInEmail = userEmail.value;
-    const signInPassword = userPassword.value;
-    signInWithEmailAndPassword(auth, signInEmail, signInPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        Swal.fire("You have signed in successfully!");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode + errorMessage);
-      });
-  };
-
-  const checkAuthState = async () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        authForm.style.display = "none";
-        secretContent.style.display = "block";
-      } else {
-        authForm.style.display = "block";
-        secretContent.style.display = "none";
-      }
-    });
-  };
-
-  const userSignOut = async () => {
-    await signOut(auth);
-    Swal.fire("User Logout");
-  };
-
-  checkAuthState();
-
-  signUpButton.addEventListener("click", userSignUp);
-  signInButton.addEventListener("click", userSignIn);
-  signOutButton.addEventListener("click", userSignOut);
-</script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
-</html>
   </body>
 </html>
